@@ -1,0 +1,32 @@
+<%= simple_form_for(@user_job) do |f| %>
+  <%= f.error_notification %>
+  
+  <% if @user_job.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@user_job.errors.count, "error") %> prohibited this user_job from being saved:</h2>
+      <ul>
+      <% @user_job.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="form-inputs">
+    <%= f.association :user, input_html: { multiple: true } %> <!-- , input_html: { multiple: true } -->
+    <%= f.association :job %>
+    <%= f.association :result %>
+    <%= f.association :requirement %>
+    <%= f.input :applied %>
+    <%= f.input :interview %>
+    <%= f.input :shortlist %>
+    <%= f.input :final %>
+    <%= f.input :reason %>
+  
+  </div>  
+    
+
+  <div class="form-actions">
+    <%= f.button :submit %>
+  </div>
+<% end %>

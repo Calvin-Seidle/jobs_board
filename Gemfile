@@ -5,6 +5,7 @@ git_source(:github) do |repo_name|
   "https://github.com/#{repo_name}.git"
 end
 
+gem 'faker'
 gem 'simple_form'
 gem 'devise'
 gem 'mysql2'
@@ -12,9 +13,8 @@ gem 'cancan'
 gem 'cocoon'
 gem 'twitter-bootstrap-rails'
 gem 'rails_admin'
-
 gem 'rails', '~> 5.1.3'
-gem 'sqlite3'
+#gem 'sqlite3'
 gem 'puma', '~> 3.7'
 gem 'sass-rails', '~> 5.0'
 gem 'uglifier', '>= 1.3.0'

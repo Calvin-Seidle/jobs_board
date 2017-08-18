@@ -10,9 +10,50 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170817102746) do
+ActiveRecord::Schema.define(version: 20170818134617) do
 
-  create_table "users", force: :cascade do |t|
+  create_table "jobs", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
+    t.string "job_link"
+    t.string "job_name"
+    t.string "company_name"
+    t.string "job_description"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "requirements", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
+    t.string "requirement"
+    t.bigint "job_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["job_id"], name: "index_requirements_on_job_id"
+  end
+
+  create_table "results", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
+    t.string "result"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "user_jobs", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
+    t.bigint "user_id"
+    t.bigint "job_id"
+    t.bigint "result_id"
+    t.bigint "requirement_id"
+    t.boolean "applied"
+    t.boolean "interview"
+    t.boolean "shortlist"
+    t.boolean "final"
+    t.string "reason"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["job_id"], name: "index_user_jobs_on_job_id"
+    t.index ["requirement_id"], name: "index_user_jobs_on_requirement_id"
+    t.index ["result_id"], name: "index_user_jobs_on_result_id"
+    t.index ["user_id"], name: "index_user_jobs_on_user_id"
+  end
+
+  create_table "users", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
     t.string "name"
     t.string "surname"
     t.string "email", default: "", null: false
@@ -27,8 +68,14 @@ ActiveRecord::Schema.define(version: 20170817102746) do
     t.string "last_sign_in_ip"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "admin"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "requirements", "jobs"
+  add_foreign_key "user_jobs", "jobs"
+  add_foreign_key "user_jobs", "requirements"
+  add_foreign_key "user_jobs", "results"
+  add_foreign_key "user_jobs", "users"
 end

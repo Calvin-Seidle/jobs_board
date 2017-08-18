@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  resources :user_jobs
+  resources :requirements
+  resources :results
+  resources :jobs
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
   get 'users/index'
 

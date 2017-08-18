@@ -1,0 +1,23 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user: one
+  job: one
+  result: one
+  requirement: one
+  applied: false
+  interview: false
+  shortlist: false
+  final: false
+  reason: MyString
+
+two:
+  user: two
+  job: two
+  result: two
+  requirement: two
+  applied: false
+  interview: false
+  shortlist: false
+  final: false
+  reason: MyString
